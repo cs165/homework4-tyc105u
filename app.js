@@ -1,10 +1,28 @@
-// This class will represent the music visualizer as a whole, similar to the
-// role that the `App` class played in HW3.
-//
-// See HW4 writeup for more hints and details.
 class App {
-  constructor() {
-    // TODO(you): Implement the constructor and add fields as necessary.
-  }
-  // TODO(you): Add methods as necessary.
+    constructor() {
+        let Main = document.querySelector('#main');
+        this.MusicScreen = new MusicScreen(Main);
+        this.MusicScreen.Pause();
+
+        let Menu = document.querySelector('#menu');
+        this.Submit = this.Submit.bind(this);
+        Menu.addEventListener('submit', this.Submit);
+
+        this.MenuScreen = new MenuScreen(Menu);
+        this.MenuScreen.show();
+    }
+    Submit(event) {
+        event.preventDefault();
+        this.MenuScreen.hide();
+        this.MusicScreen.play_musicVideo();
+    }
 }
+
+function hide() {
+    this.containerElement.classList.add('inactive');
+}
+
+function show(){
+    this.containerElement.classList.remove('inactive');
+}
+

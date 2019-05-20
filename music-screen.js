@@ -1,15 +1,54 @@
-// This class will represent the music visualizer screen, i.e. the screen that
-// you see after you select a song.
-//
-// This class should create and own:
-//   - 1 AudioPlayer
-//   - 1 GifDisplay
-//   - 1 PlayButton
-//
-// See HW4 writeup for more hints and details.
-class MusicScreen {
-  constructor() {
-    // TODO(you): Implement the constructor and add fields as necessary.
+class MusicScreen{
+  constructor(event) {
+    this.Submit = this.Submit.bind(this);
+    this.display;
+    this.sound = new AudioPlayer();
+    this.play = document.createElement("img");
+    this.play.addEventListener('click', this.Submit);
+    this.button = document.querySelector('#playButton');
+
+
+    this.api = undefined;
+    this.status = 0;
+
+    this.event = event;
   }
-  // TODO(you): Add methods as necessary.
+
+  Pause() {
+    this.event.classList.add('inactive');
+  }
+
+  Submit(event) {
+    if (this.status) {
+      this.sound.pause();
+      //this.button.setAttribute("src","./images/play.png");
+      this.status = 0;
+    }
+    else{
+      this.sound.setSong(this.api);
+      this.sound.setKickCallback(this.display);
+      this.sound.play();
+      this.button.setAttribute("src","./images/pause.png");
+      this.status = 1;
+    }
+  }
+
+  play_musicVideo() {
+    this.event.classList.remove('inactive');
+    this.play.setAttribute("id", "playButton");
+    this.play.src = "./images/play.png";
+    document.querySelector('#button').append(this.play);
+    this.play.style.width = "60px";
+    this.play.style.height = "60px";
+    var option = document.querySelectorAll('option');
+    
+    for(let i of option)
+        if(i.selected)
+          this.api = i.value;
+        
+    this.display = new GifDisplay(document.querySelector('input').value); 
+  }
+
+
 }
+
