@@ -5,7 +5,7 @@ class MusicScreen{
     this.sound = new AudioPlayer();
     this.play = document.createElement("img");
     this.play.addEventListener('click', this.Submit);
-    this.button = document.querySelector('#playButton');
+    this.buttom =  document.querySelector('#button');
 
 
     this.api = undefined;
@@ -21,7 +21,6 @@ class MusicScreen{
   Submit(event) {
     if (this.status) {
       this.sound.pause();
-      //this.button.setAttribute("src","./images/play.png");
       this.status = false;
     }
     else{
@@ -37,7 +36,7 @@ class MusicScreen{
     this.event.classList.remove('inactive');
     this.play.setAttribute("id", "playButton");
     this.play.src = "./images/play.png";
-    document.querySelector('#button').append(this.play);
+    this.buttom.append(this.play);
     this.play.style.width = "60px";
     this.play.style.height = "60px";
     var option = document.querySelectorAll('option');
