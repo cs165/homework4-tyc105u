@@ -9,7 +9,7 @@ class MusicScreen{
 
 
     this.api = undefined;
-    this.status = 0;
+    this.status = false;
 
     this.event = event;
   }
@@ -22,14 +22,14 @@ class MusicScreen{
     if (this.status) {
       this.sound.pause();
       //this.button.setAttribute("src","./images/play.png");
-      this.status = 0;
+      this.status = false;
     }
     else{
       this.sound.setSong(this.api);
       this.sound.setKickCallback(this.display);
       this.sound.play();
       this.button.setAttribute("src","./images/pause.png");
-      this.status = 1;
+      this.status = true;
     }
   }
 
